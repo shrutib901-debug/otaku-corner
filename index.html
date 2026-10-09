@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>otaku corner | your corner for everything anime</title>
+  <meta name="description" content="otaku corner - The cutest destination for anime t-shirts, scale figures, ceramic coffee mugs, keychains and art posters. Warm vibes and charming anime-inspired kawaii merch.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <!-- Google Fonts: Fredoka & Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Cute Background Stickers (Playful Doodles) -->
+  <div class="cute-bg-doodles" aria-hidden="true">
+    <div class="doodle doodle-star-1">✦</div>
+    <div class="doodle doodle-star-2">★</div>
+    <div class="doodle doodle-heart-1">♥</div>
+    <div class="doodle doodle-heart-2">♥</div>
+    <div class="doodle doodle-sparkle">✨</div>
+    <div class="doodle doodle-blush">✿</div>
+  </div>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="announcement-content">
+      <span>🚚 <strong>FREE Pan-India Delivery</strong> on orders above ₹999</span>
+      <span class="announcement-dot">•</span>
+      <span>Use code <span class="promo-pill">OTAKU10</span> for 10% off your first haul!</span>
+      <span class="announcement-dot">•</span>
+      <span>✨ 100% Kawaii Collector Packaging</span>
+    </div>
+  </div>
+
+  <!-- Sticky Header / Navbar -->
+  <header class="site-header" id="header">
+    <div class="nav-container">
+      <!-- Fun Gen Z Kawaii Logo -->
+      <a href="#home" class="logo" aria-label="otaku corner home">
+        <img src="logo.svg" alt="otaku corner" class="brand-logo-img">
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#shop" class="nav-link">Shop</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="nav-actions">
+        <!-- Search Trigger -->
+        <button class="icon-btn" id="searchToggleBtn" aria-label="Search merchandise" title="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <!-- Admin Inventory Panel Trigger Button -->
+        <button class="admin-nav-btn" id="adminOpenBtn" aria-label="Open Inventory Management Panel" title="Store Owner Inventory">
+          <span class="admin-icon">⚙️</span>
+          <span class="admin-label">Admin</span>
+        </button>
+
+        <!-- Cart Trigger Button -->
+        <button class="cart-btn" id="cartOpenBtn" aria-label="Open Cart">
+          <span class="cart-btn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+          </span>
+          <span class="cart-label">Cart</span>
+          <span class="cart-badge" id="cartCountBadge">0</span>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="badge-icon">🦊</span>
+            <span>Warm Vibes & Kawaii Drops 2026</span>
+          </div>
+
+          <h1 class="hero-title">
+            Your corner for <span class="highlight-text">everything anime</span>
+          </h1>
+
+          <p class="hero-description">
+            Your cozy sanctuary for soft heavyweight streetwear tees, delicate anime figures, warm ceramic mugs, bubbly acrylic charms, and vibrant art posters. Curated with love for real anime lovers!
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#shop" class="btn btn-primary">
+              <span>Shop Now</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#about" class="btn btn-secondary">
+              <span>Our Story 📖</span>
+            </a>
+          </div>
+
+          <!-- Hero Cute Perks Row -->
+          <div class="hero-perks">
+            <div class="perk-pill">
+              <span class="perk-icon">🍵</span>
+              <span>100% Cozy Craft</span>
+            </div>
+            <div class="perk-pill">
+              <span class="perk-icon">📦</span>
+              <span>Bubble-Wrap Safe</span>
+            </div>
+            <div class="perk-pill">
+              <span class="perk-icon">⭐</span>
+              <span>4.9★ Otaku Loved</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Product Showcase Carousel Card -->
+        <div class="hero-visual">
+          <div class="hero-card-bubble hero-carousel-card" id="heroCarouselCard">
+            <!-- Fan Favorite Sticker Tag -->
+            <div class="hero-sticker-badge">✨ Fan Favorite</div>
+
+            <!-- Subtitle banner: Anime-inspired merch you'll love -->
+            <div class="hero-showcase-header">
+              <span class="hero-showcase-subtag">✨ Anime-inspired merch you'll love</span>
+            </div>
+
+            <!-- Carousel Viewport -->
+            <div class="hero-carousel-viewport" id="heroCarouselViewport" role="region" aria-label="Featured product showcase carousel">
+              <div class="hero-carousel-track" id="heroCarouselTrack">
+
+                <!-- Slide 1: Figure -->
+                <article class="hero-slide active" data-product-id="otk-04" role="group" aria-label="1 of 4: Rival Ninjas Collectible Figure Set" title="Click to view Rival Ninjas Collectible Figure Set in shop">
+                  <div class="hero-slide-image-wrap">
+                    <img src="images/figure-1.jpg" alt="Rival Ninjas Collectible Figure Set" class="hero-slide-img" loading="eager">
+                    <span class="hero-slide-cat-badge">Figures</span>
+                  </div>
+                  <div class="hero-slide-details">
+                    <div class="hero-slide-info">
+                      <h3 class="hero-slide-title">Rival Ninjas Collectible Figure Set</h3>
+                      <span class="hero-slide-price">₹2,499</span>
+                    </div>
+                    <span class="hero-slide-action-pill">
+                      <span>View in Shop</span>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </span>
+                  </div>
+                </article>
+
+                <!-- Slide 2: Coffee Mug -->
+                <article class="hero-slide" data-product-id="otk-05" role="group" aria-label="2 of 4: Manga Panel Coffee Mug" title="Click to view Manga Panel Coffee Mug in shop">
+                  <div class="hero-slide-image-wrap">
+                    <img src="images/mug-1.jpg" alt="Manga Panel Coffee Mug" class="hero-slide-img" loading="lazy">
+                    <span class="hero-slide-cat-badge">Coffee Mugs</span>
+                  </div>
+                  <div class="hero-slide-details">
+                    <div class="hero-slide-info">
+                      <h3 class="hero-slide-title">Manga Panel Coffee Mug</h3>
+                      <span class="hero-slide-price">₹449</span>
+                    </div>
+                    <span class="hero-slide-action-pill">
+                      <span>View in Shop</span>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </span>
+                  </div>
+                </article>
+
+                <!-- Slide 3: Keychain -->
+                <article class="hero-slide" data-product-id="otk-06" role="group" aria-label="3 of 4: Academy Squad Keychain Pack" title="Click to view Academy Squad Keychain Pack in shop">
+                  <div class="hero-slide-image-wrap">
+                    <img src="images/keychain-1.jpg" alt="Academy Squad Keychain Pack" class="hero-slide-img" loading="lazy">
+                    <span class="hero-slide-cat-badge">Keychains</span>
+                  </div>
+                  <div class="hero-slide-details">
+                    <div class="hero-slide-info">
+                      <h3 class="hero-slide-title">Academy Squad Keychain Pack</h3>
+                      <span class="hero-slide-price">₹299</span>
+                    </div>
+                    <span class="hero-slide-action-pill">
+                      <span>View in Shop</span>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </span>
+                  </div>
+                </article>
+
+                <!-- Slide 4: T-Shirt -->
+                <article class="hero-slide" data-product-id="otk-01" role="group" aria-label="4 of 4: Red Pirate Crew Jersey Set" title="Click to view Red Pirate Crew Jersey Set in shop">
+                  <div class="hero-slide-image-wrap">
+                    <img src="images/tshirt-1.jpg" alt="Red Pirate Crew Jersey Set" class="hero-slide-img" loading="lazy">
+                    <span class="hero-slide-cat-badge">T-Shirts</span>
+                  </div>
+                  <div class="hero-slide-details">
+                    <div class="hero-slide-info">
+                      <h3 class="hero-slide-title">Red Pirate Crew Jersey Set</h3>
+                      <span class="hero-slide-price">₹1,299</span>
+                    </div>
+                    <span class="hero-slide-action-pill">
+                      <span>View in Shop</span>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </span>
+                  </div>
+                </article>
+
+              </div>
+            </div>
+
+            <!-- Carousel Navigation Dots & Controls -->
+            <div class="hero-carousel-footer">
+              <button type="button" class="hero-carousel-btn" id="heroPrevBtn" aria-label="Previous slide" title="Previous product">‹</button>
+              <div class="hero-carousel-dots" id="heroCarouselDots" role="tablist" aria-label="Featured product carousel indicators">
+                <button type="button" class="carousel-dot active" data-slide-index="0" aria-label="Slide 1: Rival Ninjas Figure" role="tab" aria-selected="true"></button>
+                <button type="button" class="carousel-dot" data-slide-index="1" aria-label="Slide 2: Manga Panel Coffee Mug" role="tab" aria-selected="false"></button>
+                <button type="button" class="carousel-dot" data-slide-index="2" aria-label="Slide 3: Academy Squad Keychain" role="tab" aria-selected="false"></button>
+                <button type="button" class="carousel-dot" data-slide-index="3" aria-label="Slide 4: Red Pirate Crew Jersey" role="tab" aria-selected="false"></button>
+              </div>
+              <button type="button" class="hero-carousel-btn" id="heroNextBtn" aria-label="Next slide" title="Next product">›</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Highlights Strip -->
+    <section class="features-strip">
+      <div class="features-container">
+        <div class="feature-box">
+          <div class="feature-icon icon-orange">👕</div>
+          <div class="feature-text">
+            <h3>Cute T-Shirts</h3>
+            <p>100% Combed ringspun cotton</p>
+          </div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon icon-yellow">⚡</div>
+          <div class="feature-text">
+            <h3>Scale Figures</h3>
+            <p>Collector hand-finished statues</p>
+          </div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon icon-pink">☕</div>
+          <div class="feature-text">
+            <h3>Coffee Mugs</h3>
+            <p>Microwave-safe ceramic goodness</p>
+          </div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon icon-teal">🔑</div>
+          <div class="feature-text">
+            <h3>Keychains</h3>
+            <p>Double-sided acrylic charms</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shop / Merchandise Catalog Section -->
+    <section class="shop-section" id="shop">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-pill">🛍️ Browse Catalog</span>
+          <h2 class="section-title">Explore Our Cute Collection</h2>
+          <p class="section-desc">Hand-picked anime merchandise designed to bring sunshine and warmth to your everyday setup!</p>
+        </div>
+
+        <!-- Filter, Search and Sorting Controls -->
+        <div class="shop-controls-bar">
+          <!-- Category Filter Buttons -->
+          <div class="filter-tabs" id="filterTabs">
+            <button class="filter-btn active" data-category="all">All (<span id="countAll">9</span>)</button>
+            <button class="filter-btn" data-category="t-shirts">T-Shirts (<span id="countTshirts">3</span>)</button>
+            <button class="filter-btn" data-category="figures">Figures (<span id="countFigures">1</span>)</button>
+            <button class="filter-btn" data-category="coffee mugs">Coffee Mugs (<span id="countMugs">1</span>)</button>
+            <button class="filter-btn" data-category="keychains">Keychains (<span id="countKeychains">3</span>)</button>
+            <button class="filter-btn" data-category="posters">Posters (<span id="countPosters">1</span>)</button>
+          </div>
+
+          <!-- Live Search & Sort By Price -->
+          <div class="search-sort-group">
+            <div class="search-input-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="searchInput" placeholder="Search tee, figure, poster, mug..." aria-label="Search products">
+              <button id="clearSearchBtn" class="clear-search-btn" title="Clear search" style="display: none;">✕</button>
+            </div>
+
+            <div class="sort-wrapper">
+              <select id="sortSelect" aria-label="Sort products">
+                <option value="featured">Sort by: Featured</option>
+                <option value="price-low">Sort by Price: Low to High</option>
+                <option value="price-high">Sort by Price: High to Low</option>
+                <option value="name-asc">Sort by: Name (A to Z)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Items Counter Summary -->
+        <div class="active-filter-summary" id="filterSummary">
+          Showing <span id="visibleProductsCount">9</span> adorable anime items
+        </div>
+
+        <!-- Product Cards Grid -->
+        <div class="products-grid" id="productsGrid">
+          <!-- Populated dynamically via script.js -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <div class="empty-icon">🐱</div>
+          <h3>No Merch Found Here!</h3>
+          <p>We couldn't find anything matching your search. Try resetting your search or pick another category.</p>
+          <button class="btn btn-primary" id="resetFiltersBtn">Reset All Filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="section-container">
+        <div class="about-grid">
+          <div class="about-text-col">
+            <span class="section-pill">🦊 Our Story</span>
+            <h2 class="section-title">Built by Anime Fans, for Anime Fans</h2>
+            <p class="about-lead">
+              Otaku Corner started with a simple dream: we wanted cute, comfortable anime merchandise that feels warm, looks cheerful, and lasts forever.
+            </p>
+            <p class="about-body">
+              No dull black-and-white knockoffs. No dented boxes. Just bright colors, charming original anime aesthetics, heavy-blend comfy tees, collector figures, and vibrant art prints packaged with tender love and care.
+            </p>
+
+            <div class="about-features-list">
+              <div class="about-feature-item">
+                <div class="check-icon">✓</div>
+                <div>
+                  <strong>Original Kawaii Designs:</strong>
+                  <span>Wholesome, creative anime illustrations with zero copyright infringement.</span>
+                </div>
+              </div>
+              <div class="about-feature-item">
+                <div class="check-icon">✓</div>
+                <div>
+                  <strong>Double-Cushioned Bubble Packaging:</strong>
+                  <span>Your figures and mugs arrive safely with zero transit mishaps.</span>
+                </div>
+              </div>
+              <div class="about-feature-item">
+                <div class="check-icon">✓</div>
+                <div>
+                  <strong>Fair Direct-to-Fan Pricing in Rupees (₹):</strong>
+                  <span>Friendly pricing with no hidden shipping fees on qualifying orders.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-visual-col">
+            <div class="about-stats-card">
+              <div class="about-card-badge">🎌 The Otaku Promise</div>
+              <h3>100% Wholesome Community</h3>
+              <div class="stat-pill-group">
+                <div class="stat-pill">
+                  <span class="pill-number">25K+</span>
+                  <span class="pill-label">Happy Otakus</span>
+                </div>
+                <div class="stat-pill">
+                  <span class="pill-number">100%</span>
+                  <span class="pill-label">Combed Cotton</span>
+                </div>
+                <div class="stat-pill">
+                  <span class="pill-number">4.9★</span>
+                  <span class="pill-label">Store Rating</span>
+                </div>
+                <div class="stat-pill">
+                  <span class="pill-number">24/7</span>
+                  <span class="pill-label">Friendly Care</span>
+                </div>
+              </div>
+              <div class="quote-box">
+                <p>"Anime is comfort food for the soul, and Otaku Corner is your cozy home away from home."</p>
+                <span>— The Otaku Corner Crew</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-pill">💌 Get in Touch</span>
+          <h2 class="section-title">Say Konnichiwa!</h2>
+          <p class="section-desc">Have questions about sizing, restocks, custom bulk keychains, or tracking? We'd love to chat.</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Info -->
+          <div class="contact-info-card">
+            <h3>Otaku Corner Hub</h3>
+            <p>Reach out anytime! Our team responds within 24 hours.</p>
+
+            <div class="contact-detail-items">
+              <div class="contact-item">
+                <div class="contact-item-icon">📍</div>
+                <div>
+                  <strong>Studio & Warehouse</strong>
+                  <p>Otaku Corner Studio, Neo-Tokyo Arc, Bandra West, Mumbai 400050</p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon">✉️</div>
+                <div>
+                  <strong>Email Support</strong>
+                  <p>support@otakucorner.in</p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon">📞</div>
+                <div>
+                  <strong>Phone / WhatsApp</strong>
+                  <p>+91 (022) 8492-OTAKU (Mon - Sat, 10 AM - 7 PM)</p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon">⚡</div>
+                <div>
+                  <strong>Fast Pan-India Dispatch</strong>
+                  <p>Packed & dispatched within 24 business hours</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-card">
+            <h3>Send Us a Transmission</h3>
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contactName">Your Name *</label>
+                  <input type="text" id="contactName" placeholder="e.g. Kenji Tanaka" required>
+                </div>
+                <div class="form-group">
+                  <label for="contactEmail">Email Address *</label>
+                  <input type="email" id="contactEmail" placeholder="e.g. kenji@example.com" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactSubject">What's on your mind? *</label>
+                <select id="contactSubject" required>
+                  <option value="">Choose a topic</option>
+                  <option value="order">Order Tracking & Delivery</option>
+                  <option value="restock">Size Inquiry or Restock</option>
+                  <option value="custom">Custom Anime Merch</option>
+                  <option value="feedback">General Love & Feedback</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="contactMessage">Your Message *</label>
+                <textarea id="contactMessage" rows="4" placeholder="Write your message here..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary form-submit-btn" id="contactSubmitBtn">
+                <span>Send Message ✨</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="logo" aria-label="otaku corner home">
+            <img src="logo.svg" alt="otaku corner" class="brand-logo-img">
+          </a>
+          <p class="footer-tagline">
+            Your corner for everything anime. Bringing heartwarming tees, figures, ceramic mugs, keychains, and posters straight to your collection!
+          </p>
+          <div class="social-links">
+            <a href="#home" class="social-btn" title="Instagram">📸</a>
+            <a href="#home" class="social-btn" title="Twitter / X">🐦</a>
+            <a href="#home" class="social-btn" title="Discord">🎮</a>
+            <a href="#home" class="social-btn" title="YouTube">📺</a>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Merch Categories</h4>
+          <ul>
+            <li><a href="#shop" data-filter="t-shirts">Cute T-Shirts</a></li>
+            <li><a href="#shop" data-filter="figures">Anime Figures</a></li>
+            <li><a href="#shop" data-filter="coffee mugs">Ceramic Mugs</a></li>
+            <li><a href="#shop" data-filter="keychains">Acrylic Keychains</a></li>
+            <li><a href="#shop" data-filter="posters">Art Posters</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Quick Navigation</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#shop">Shop All</a></li>
+            <li><a href="#about">About Our Store</a></li>
+            <li><a href="#contact">Contact Support</a></li>
+            <li><a href="javascript:void(0)" onclick="openAdminPanel()">Inventory Panel ⚙️</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Warm Guarantees</h4>
+          <p class="guarantee-text">
+            🧡 Safe UPI, Card & NetBanking payments.<br>
+            📦 Sturdy double-boxed bubble packaging.<br>
+            🔄 7-day hassle-free replacement policy.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 otaku corner. All rights reserved. Crafted with 🧡 for anime lovers across India.</p>
+        <p class="footer-disclaimer">Original themed merchandise inspired by anime aesthetics. No copyrighted characters or trademarks are reproduced.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Over Shopping Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+    <div class="cart-header">
+      <div class="cart-header-title">
+        <span class="cart-header-fox">🦊</span>
+        <h3>Your Otaku Cart</h3>
+      </div>
+      <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close cart">&times;</button>
+    </div>
+
+    <!-- Free Delivery Progress Bar -->
+    <div class="shipping-progress-box" id="shippingProgressBar">
+      <div class="shipping-progress-text" id="shippingProgressText">
+        Add items worth ₹999 for FREE delivery!
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="shippingProgressFill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items List Container -->
+    <div class="cart-items-list" id="cartItemsList">
+      <!-- Injected via script.js -->
+    </div>
+
+    <!-- Cart Footer & Checkout Action -->
+    <div class="cart-footer" id="cartFooter">
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">₹0</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Delivery Fee</span>
+        <span id="cartShipping">₹0</span>
+      </div>
+      <div class="cart-summary-row cart-total-row">
+        <span>Grand Total</span>
+        <span id="cartGrandTotal">₹0</span>
+      </div>
+
+      <!-- Demo Checkout Button -->
+      <button class="btn btn-primary checkout-btn" id="checkoutBtn">
+        <span>Proceed to Checkout</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+
+      <button class="clear-cart-btn" id="clearCartBtn">Clear Shopping Cart</button>
+    </div>
+  </aside>
+
+  <!-- Demo Checkout Success Modal -->
+  <div class="modal-overlay" id="checkoutModalOverlay">
+    <div class="checkout-modal">
+      <div class="modal-icon">🎉</div>
+      <h3>Demo Order Placed!</h3>
+      <p>Arigatou gozaimasu! This is a demo checkout. Your order summary has been generated below.</p>
+      <div class="modal-order-details" id="modalOrderSummary"></div>
+      <button class="btn btn-primary" id="modalCloseBtn">Continue Shopping ✨</button>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       STORE OWNER INVENTORY MANAGEMENT PANEL (MODAL / OVERLAY)
+       ======================================================== -->
+  <div class="admin-panel-overlay" id="adminPanelOverlay">
+    <div class="admin-panel-container">
+      <!-- Admin Header -->
+      <div class="admin-panel-header">
+        <div class="admin-title-box">
+          <span class="admin-badge">⚙️ Owner Console</span>
+          <h2>Inventory Management</h2>
+          <p>Real-time stock controls, product catalog manager & automatic order sync.</p>
+        </div>
+        <div class="admin-header-actions">
+          <button class="btn btn-primary add-product-btn" id="openAddProductModalBtn">
+            <span>+ Add New Product</span>
+          </button>
+          <button class="admin-close-btn" id="adminCloseBtn" aria-label="Close inventory panel">✕ Close Panel</button>
+        </div>
+      </div>
+
+      <!-- Inventory Summary Cards (4 Cards) -->
+      <div class="admin-stats-grid">
+        <div class="admin-stat-card card-total-products">
+          <div class="stat-icon-wrap">📦</div>
+          <div class="stat-info">
+            <span class="stat-label">Total Products</span>
+            <span class="stat-val" id="statTotalProducts">0</span>
+          </div>
+        </div>
+
+        <div class="admin-stat-card card-total-stock">
+          <div class="stat-icon-wrap">📊</div>
+          <div class="stat-info">
+            <span class="stat-label">Total Units in Stock</span>
+            <span class="stat-val" id="statTotalStock">0</span>
+          </div>
+        </div>
+
+        <div class="admin-stat-card card-low-stock">
+          <div class="stat-icon-wrap">⚠️</div>
+          <div class="stat-info">
+            <span class="stat-label">Low Stock (&lt; 5 units)</span>
+            <span class="stat-val" id="statLowStock">0</span>
+          </div>
+        </div>
+
+        <div class="admin-stat-card card-out-stock">
+          <div class="stat-icon-wrap">❌</div>
+          <div class="stat-info">
+            <span class="stat-label">Out of Stock (0 units)</span>
+            <span class="stat-val" id="statOutStock">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Toolbar (Filter & Search within Inventory) -->
+      <div class="admin-table-toolbar">
+        <div class="admin-search-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="adminSearchInput" placeholder="Filter inventory by name or category...">
+        </div>
+
+        <div class="admin-filter-pills">
+          <button class="admin-filter-pill active" data-admin-filter="all">All Items</button>
+          <button class="admin-filter-pill" data-admin-filter="low">Below 5 Stock</button>
+          <button class="admin-filter-pill" data-admin-filter="out">Out of Stock</button>
+          <button class="admin-filter-pill" data-admin-filter="in">Healthy Stock (≥ 5)</button>
+        </div>
+      </div>
+
+      <!-- Inventory Table -->
+      <div class="admin-table-wrapper">
+        <table class="admin-products-table" id="adminProductsTable">
+          <thead>
+            <tr>
+              <th style="width: 70px;">Item</th>
+              <th>Product Details</th>
+              <th>Category</th>
+              <th>Price (₹)</th>
+              <th>Stock Units</th>
+              <th>Stock Status</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminProductsTbody">
+            <!-- Rendered dynamically via script.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add / Edit Product Modal -->
+  <div class="modal-overlay" id="productFormModalOverlay">
+    <div class="product-form-modal">
+      <div class="product-form-header">
+        <h3 id="productFormTitle">Add New Anime Product</h3>
+        <button class="cart-close-btn" id="productFormCloseBtn">&times;</button>
+      </div>
+
+      <form id="productForm" novalidate>
+        <input type="hidden" id="formProductId">
+
+        <div class="form-group">
+          <label for="formProductName">Product Name *</label>
+          <input type="text" id="formProductName" placeholder="e.g. Chibi Neko Boba Figurine" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="formProductCategory">Category *</label>
+            <select id="formProductCategory" required>
+              <option value="t-shirts">T-Shirts</option>
+              <option value="figures">Figures</option>
+              <option value="coffee mugs">Coffee Mugs</option>
+              <option value="keychains">Keychains</option>
+              <option value="posters">Posters</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="formProductPrice">Price in Rupees (₹) *</label>
+            <input type="number" id="formProductPrice" min="1" placeholder="e.g. 799" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="formProductStock">Initial Stock Quantity *</label>
+            <input type="number" id="formProductStock" min="0" placeholder="e.g. 15" required>
+          </div>
+
+          <div class="form-group">
+            <label for="formProductTheme">Sticker Theme Icon</label>
+            <select id="formProductTheme">
+              <option value="fox">🦊 Kawaii Fox</option>
+              <option value="cat">🐱 Ramen Neko</option>
+              <option value="robot">⚡ Mecha Robot</option>
+              <option value="bear">🐻 Ninja Bear</option>
+              <option value="star">⭐ Star Charm</option>
+              <option value="strawberry">🍓 Strawberry Milk</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="formProductImage">Product Image (File Path or URL)</label>
+          <input 
+            type="text" 
+            id="formProductImage" 
+            placeholder="e.g. images/tshirt-1.jpg or https://images.unsplash.com/..." 
+            autocomplete="off"
+          >
+          <div class="image-input-hint">
+            Accepts relative paths (e.g. <code>images/tshirt-1.jpg</code>) or web URLs (<code>https://...</code>).
+          </div>
+          <div class="admin-image-preview-wrap" id="formImagePreviewWrap">
+            <img id="formImagePreview" src="" alt="Preview" class="admin-preview-img" style="display: none;">
+            <div class="admin-preview-info" id="formImagePreviewInfo">
+              <span id="previewStatusText">📷 No image path entered (category default will be used)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="formProductDesc">Description *</label>
+          <textarea id="formProductDesc" rows="3" placeholder="Short description of quality and details..." required></textarea>
+        </div>
+
+        <div class="product-form-actions">
+          <button type="button" class="btn btn-secondary" id="productFormCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="productFormSubmitBtn">Save Product ✨</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

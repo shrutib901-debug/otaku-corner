@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 76" width="330" height="76">
+  <defs>
+    <filter id="logoStickerDrop" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#3B2314" flood-opacity="0.16" />
+    </filter>
+  </defs>
+
+  <!-- ================= FOX FACE STICKER (LEFT) ================= -->
+  <g transform="translate(4, 3)" filter="url(#logoStickerDrop)">
+    <!-- Thick White Outer Die-Cut Sticker Outline -->
+    <path d="M 36 10
+             C 41 10, 46 6, 54 11
+             C 61 15, 64 25, 60 34
+             C 66 41, 66 52, 60 59
+             C 52 68, 43 69, 36 69
+             C 29 69, 20 68, 12 59
+             C 6 52, 6 41, 12 34
+             C 8 25, 11 15, 18 11
+             C 26 6, 31 10, 36 10 Z"
+          fill="#FFFFFF"
+          stroke="#3B2314"
+          stroke-width="4.5"
+          stroke-linejoin="round"
+          stroke-linecap="round" />
+
+    <!-- Left Ear -->
+    <path d="M 19 33 L 18 15 C 18 13.5, 21 13, 23 16 L 31 30 Z"
+          fill="#FF6B35"
+          stroke="#3B2314"
+          stroke-width="2.8"
+          stroke-linejoin="round" />
+    <path d="M 20 18 L 23 17 L 28 27 L 21 28 Z"
+          fill="#FF8FA3" />
+
+    <!-- Right Ear -->
+    <path d="M 53 33 L 54 15 C 54 13.5, 51 13, 49 16 L 41 30 Z"
+          fill="#FF6B35"
+          stroke="#3B2314"
+          stroke-width="2.8"
+          stroke-linejoin="round" />
+    <path d="M 52 18 L 49 17 L 44 27 L 51 28 Z"
+          fill="#FF8FA3" />
+
+    <!-- Fox Main Face Bulb -->
+    <path d="M 36 21
+             C 51 21, 60 32, 60 44
+             C 60 56, 49 64, 36 64
+             C 23 64, 12 56, 12 44
+             C 12 32, 21 21, 36 21 Z"
+          fill="#FF6B35"
+          stroke="#3B2314"
+          stroke-width="2.8"
+          stroke-linejoin="round" />
+
+    <!-- Cream Muzzle & Cheeks -->
+    <path d="M 36 36
+             C 42 36, 51 35, 57 43
+             C 58 50, 53 61, 36 61
+             C 19 61, 14 50, 15 43
+             C 21 35, 30 36, 36 36 Z"
+          fill="#FFF4E6"
+          stroke="#3B2314"
+          stroke-width="2"
+          stroke-linejoin="round" />
+
+    <!-- Pink Blush -->
+    <ellipse cx="19" cy="47" rx="4" ry="2.8" fill="#FF8FA3" opacity="0.9" />
+    <ellipse cx="53" cy="47" rx="4" ry="2.8" fill="#FF8FA3" opacity="0.9" />
+
+    <!-- Kawaii Eyes -->
+    <circle cx="26" cy="40" r="3.5" fill="#3B2314" />
+    <circle cx="25" cy="39" r="1.3" fill="#FFFFFF" />
+
+    <!-- Happy Winking Right Eye -->
+    <path d="M 43 41 Q 46 37 49 41"
+          fill="none"
+          stroke="#3B2314"
+          stroke-width="2.5"
+          stroke-linecap="round" />
+
+    <!-- Nose -->
+    <path d="M 34.5 49 C 34.5 47.5, 37.5 47.5, 37.5 49 L 36 51 Z"
+          fill="#3B2314" />
+
+    <!-- 'w' Smile -->
+    <path d="M 33 52 Q 34.5 54.5 36 52.5 Q 37.5 54.5 39 52"
+          fill="none"
+          stroke="#3B2314"
+          stroke-width="1.8"
+          stroke-linecap="round" />
+
+    <!-- Forehead Star Sparkle -->
+    <path d="M 36 24 L 37.2 26.8 L 40 28 L 37.2 29.2 L 36 32 L 34.8 29.2 L 32 28 L 34.8 26.8 Z"
+          fill="#FFB703" />
+  </g>
+
+  <!-- ================= BUBBLY TEXT: "otaku corner" ================= -->
+  <g id="brand-text-group" transform="translate(74, 0)">
+    <!-- Decorative Floating Sparkles & Hearts -->
+    <path d="M 222 15 L 224 19 L 228 20 L 224 21 L 222 25 L 220 21 L 216 20 L 220 19 Z" fill="#FFB703" />
+    <path d="M 6 18 C 6 15, 9 14, 11 16 C 13 14, 16 15, 16 18 C 16 21, 11 24, 11 24 C 11 24, 6 21, 6 18 Z" fill="#FF8FA3" transform="scale(0.85) translate(232, 28)" />
+
+    <!-- Text Background Stroke (White Sticker Outline) -->
+    <text x="2" y="45"
+          font-family="'Fredoka', 'Quicksand', 'Comfortaa', -apple-system, sans-serif"
+          font-size="31.5"
+          font-weight="800"
+          letter-spacing="-0.5"
+          textLength="212"
+          lengthAdjust="spacingAndGlyphs"
+          fill="#FFFFFF"
+          stroke="#FFFFFF"
+          stroke-width="8"
+          stroke-linejoin="round"
+          stroke-linecap="round">otaku corner</text>
+
+    <!-- Text Dark Brown Outline -->
+    <text x="2" y="45"
+          font-family="'Fredoka', 'Quicksand', 'Comfortaa', -apple-system, sans-serif"
+          font-size="31.5"
+          font-weight="800"
+          letter-spacing="-0.5"
+          textLength="212"
+          lengthAdjust="spacingAndGlyphs"
+          fill="#3B2314"
+          stroke="#3B2314"
+          stroke-width="3.5"
+          stroke-linejoin="round"
+          stroke-linecap="round">otaku corner</text>
+
+    <!-- Text Vibrant Sunset Orange Fill with Warm Highlight -->
+    <text x="2" y="45"
+          font-family="'Fredoka', 'Quicksand', 'Comfortaa', -apple-system, sans-serif"
+          font-size="31.5"
+          font-weight="800"
+          letter-spacing="-0.5"
+          textLength="212"
+          lengthAdjust="spacingAndGlyphs"
+          fill="#FF6B35">otaku corner</text>
+
+    <!-- Cute Subtitle Tag: "オタクコーナー • kawaii merch" -->
+    <g transform="translate(4, 53)">
+      <!-- Pill background -->
+      <rect x="0" y="0" width="138" height="17" rx="8.5" fill="#FFE5D4" stroke="#FF8FA3" stroke-width="1.2" />
+      <text x="8" y="12"
+            font-family="'Quicksand', 'Outfit', sans-serif"
+            font-size="9"
+            font-weight="700"
+            letter-spacing="1"
+            fill="#3B2314">オタクコーナー</text>
+      <circle cx="85" cy="8.5" r="2" fill="#FF6B35" />
+      <text x="93" y="12"
+            font-family="'Quicksand', 'Outfit', sans-serif"
+            font-size="8.5"
+            font-weight="700"
+            letter-spacing="0.5"
+            fill="#FF6B35">kawaii merch</text>
+    </g>
+  </g>
+</svg>
