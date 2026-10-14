@@ -121,6 +121,8 @@ function getDefaultImageForCategory(category) {
 // Replace localStorage with fetch('/api/...') when connecting a backend server.
 // ==========================================================================
 const PRODUCTS_STORAGE_KEY = 'otaku_corner_products_v7';
+const DATA_VERSION_KEY = 'otaku_corner_data_version';
+const CURRENT_DATA_VERSION = 'v8_price_update';
 const CART_STORAGE_KEY = 'otaku_corner_cart_v5';
 const FREE_SHIPPING_THRESHOLD = 999;
 const FLAT_SHIPPING_FEE = 99;
@@ -133,7 +135,7 @@ const INITIAL_PRODUCTS = [
     name: 'Red Pirate Crew Jersey Set',
     category: 't-shirts',
     categoryLabel: 'T-Shirts',
-    price: 1299,
+    price: 899,
     stock: 15,
     stockStatus: 'In Stock',
     stockType: 'in',
@@ -157,7 +159,7 @@ const INITIAL_PRODUCTS = [
     name: 'Overlord Back Print Oversized Tee',
     category: 't-shirts',
     categoryLabel: 'T-Shirts',
-    price: 899,
+    price: 599,
     stock: 3, // Low stock: 3 left
     stockStatus: 'Low Stock',
     stockType: 'low',
@@ -181,7 +183,7 @@ const INITIAL_PRODUCTS = [
     name: 'Monochrome Anime Face Graphic Tee',
     category: 't-shirts',
     categoryLabel: 'T-Shirts',
-    price: 799,
+    price: 499,
     stock: 18,
     stockStatus: 'In Stock',
     stockType: 'in',
@@ -209,7 +211,7 @@ const INITIAL_PRODUCTS = [
     name: 'Rival Ninjas Collectible Figure Set',
     category: 'figures',
     categoryLabel: 'Figures',
-    price: 2499,
+    price: 1499,
     stock: 8,
     stockStatus: 'In Stock',
     stockType: 'in',
@@ -236,7 +238,7 @@ const INITIAL_PRODUCTS = [
     name: 'Manga Panel Coffee Mug',
     category: 'coffee mugs',
     categoryLabel: 'Coffee Mugs',
-    price: 449,
+    price: 299,
     stock: 20,
     stockStatus: 'In Stock',
     stockType: 'in',
@@ -265,7 +267,7 @@ const INITIAL_PRODUCTS = [
     name: 'Academy Squad Keychain Pack',
     category: 'keychains',
     categoryLabel: 'Keychains',
-    price: 299,
+    price: 249,
     stock: 25,
     stockStatus: 'In Stock',
     stockType: 'in',
@@ -293,7 +295,7 @@ const INITIAL_PRODUCTS = [
     name: 'Ninja Squad Keychain Pack',
     category: 'keychains',
     categoryLabel: 'Keychains',
-    price: 299,
+    price: 249,
     stock: 12,
     stockStatus: 'In Stock',
     stockType: 'in',
@@ -319,7 +321,7 @@ const INITIAL_PRODUCTS = [
     name: 'Young Warrior Strap Keychain',
     category: 'keychains',
     categoryLabel: 'Keychains',
-    price: 199,
+    price: 129,
     stock: 0, // Out of Stock: 0 left
     stockStatus: 'Out of Stock',
     stockType: 'out',
@@ -348,7 +350,7 @@ const INITIAL_PRODUCTS = [
     name: 'Motivational Anime Quote Poster Set (6 pcs)',
     category: 'posters',
     categoryLabel: 'Posters',
-    price: 399,
+    price: 249,
     stock: 14,
     stockStatus: 'In Stock',
     stockType: 'in',
@@ -391,31 +393,81 @@ function syncProductStockStatus(product) {
 // ----------------------------------------------------
 function getProducts() {
   try {
+    const savedVersion = localStorage.getItem(DATA_VERSION_KEY);
     let raw = localStorage.getItem(PRODUCTS_STORAGE_KEY);
-    if (!raw) {
-      // Check if previous v6 data exists to preserve custom products added in admin panel
-      let initialList = [...INITIAL_PRODUCTS];
-      const prevRaw = localStorage.getItem('otaku_corner_products_v6');
-      if (prevRaw) {
+
+    // If data version key is missing or outdated, update prices to new values while keeping stock, images, etc.
+    if (savedVersion !== CURRENT_DATA_VERSION) {
+      let list = null;
+      if (raw) {
         try {
-          const prevList = JSON.parse(prevRaw);
-          // Preserve any custom products (products whose id is not in INITIAL_PRODUCTS)
-          const customItems = prevList.filter(item => !INITIAL_PRODUCTS.some(init => init.id === item.id));
-          if (customItems.length > 0) {
-            initialList = [...INITIAL_PRODUCTS, ...customItems];
-          }
-        } catch (prevErr) {
-          console.warn('Migration from v6 skipped:', prevErr);
+          list = JSON.parse(raw);
+        } catch (e) {
+          list = null;
         }
       }
+
+      // If current storage key has no items, check older keys like v6
+      if (!list || !Array.isArray(list) || list.length === 0) {
+        list = INITIAL_PRODUCTS.map(p => ({ ...p }));
+        const prevRaw = localStorage.getItem('otaku_corner_products_v6');
+        if (prevRaw) {
+          try {
+            const prevList = JSON.parse(prevRaw);
+            const customItems = prevList.filter(item => !INITIAL_PRODUCTS.some(init => init.id === item.id));
+            if (customItems.length > 0) {
+              list = [...list, ...customItems];
+            }
+            prevList.forEach(prevItem => {
+              const match = list.find(item => item.id === prevItem.id);
+              if (match && typeof prevItem.stock === 'number') {
+                match.stock = prevItem.stock;
+                syncProductStockStatus(match);
+              }
+            });
+          } catch (prevErr) {
+            console.warn('Migration from v6 skipped:', prevErr);
+          }
+        }
+      } else {
+        // Saved data already exists in browser:
+        // Update prices to new prices, while KEEPING stock values, images and everything else
+        list.forEach(savedItem => {
+          const initialMatch = INITIAL_PRODUCTS.find(p => p.id === savedItem.id);
+          if (initialMatch) {
+            savedItem.price = initialMatch.price; // Update to the new price
+            if (!savedItem.image) {
+              savedItem.image = initialMatch.image;
+            }
+          }
+          syncProductStockStatus(savedItem);
+        });
+
+        // Ensure all initial products are present
+        INITIAL_PRODUCTS.forEach(initialItem => {
+          if (!list.some(item => item.id === initialItem.id)) {
+            list.push({ ...initialItem });
+          }
+        });
+      }
+
+      saveProducts(list);
+      localStorage.setItem(DATA_VERSION_KEY, CURRENT_DATA_VERSION);
+      return list;
+    }
+
+    // When already at CURRENT_DATA_VERSION
+    if (!raw) {
+      const initialList = INITIAL_PRODUCTS.map(p => ({ ...p }));
       saveProducts(initialList);
+      localStorage.setItem(DATA_VERSION_KEY, CURRENT_DATA_VERSION);
       return initialList;
     }
+
     const list = JSON.parse(raw);
     let needsSave = false;
     list.forEach(item => {
       syncProductStockStatus(item);
-      // Ensure initial 9 products strictly use their verified image files
       const initial = INITIAL_PRODUCTS.find(p => p.id === item.id);
       if (initial && item.image !== initial.image) {
         item.image = initial.image;
@@ -429,7 +481,7 @@ function getProducts() {
     return list;
   } catch (e) {
     console.error('Error in getProducts', e);
-    return [...INITIAL_PRODUCTS];
+    return INITIAL_PRODUCTS.map(p => ({ ...p }));
   }
 }
 
@@ -1766,6 +1818,18 @@ function initHeroCarousel() {
   const dots = dotsContainer.querySelectorAll('.carousel-dot');
   const totalSlides = slides.length;
   if (totalSlides === 0) return;
+
+  // Synchronize carousel slide prices with current product catalog
+  slides.forEach(slide => {
+    const prodId = slide.getAttribute('data-product-id');
+    if (prodId) {
+      const prod = getProductById(prodId);
+      if (prod) {
+        const priceEl = slide.querySelector('.hero-slide-price');
+        if (priceEl) priceEl.textContent = formatRupees(prod.price);
+      }
+    }
+  });
 
   let currentIndex = 0;
   let autoSlideTimer = null;
