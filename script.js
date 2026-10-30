@@ -40,7 +40,7 @@ window.handleProductImageError = function(imgElement, productId) {
     if (!container.querySelector('.photo-unavailable-badge')) {
       const badge = document.createElement('span');
       badge.className = 'photo-unavailable-badge';
-      badge.innerHTML = '<span>⚠️ Photo missing</span>';
+      badge.innerHTML = '<span>Photo missing</span>';
       container.appendChild(badge);
     }
   }
@@ -57,7 +57,7 @@ window.handleProductImageSuccess = function(imgElement, productId) {
     const artBtn = container.querySelector('.view-mode-btn[data-mode="art"]');
     if (photoBtn) {
       photoBtn.classList.remove('disabled');
-      photoBtn.title = 'Real product photo (Default)';
+      photoBtn.title = 'Real product photo';
     }
     // Only show photo if user has not explicitly clicked art
     if (container.getAttribute('data-current-view') !== 'art') {
@@ -580,29 +580,20 @@ function generateProductSvg(theme, title, categoryLabel) {
     strawberry: '#FFEBF0'
   };
   const bg = bgColors[theme] || '#FFEEDB';
-  const icons = {
-    fox: '🦊',
-    cat: '🐱',
-    robot: '⚡',
-    bear: '🐻',
-    star: '⭐',
-    strawberry: '🍓'
-  };
-  const icon = icons[theme] || '✨';
 
   return `
     <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-      <rect width="300" height="300" rx="20" fill="#FFFBF5"/>
+      <rect width="300" height="300" rx="12" fill="#FFFBF5"/>
       <circle cx="150" cy="150" r="105" fill="${bg}"/>
-      <circle cx="150" cy="140" r="50" fill="#FFFFFF" stroke="#3B2314" stroke-width="3"/>
-      <text x="150" y="156" font-size="44" text-anchor="middle">${icon}</text>
-      <text x="150" y="224" font-family="'Fredoka', sans-serif" font-weight="700" font-size="12" fill="#3B2314" text-anchor="middle">${title.toUpperCase().slice(0, 16)}</text>
-      <text x="150" y="240" font-family="'Quicksand', sans-serif" font-weight="700" font-size="9" fill="#FF6B35" text-anchor="middle">${categoryLabel.toUpperCase()}</text>
+      <circle cx="150" cy="135" r="42" fill="#FFFFFF" stroke="#3B2314" stroke-width="2"/>
+      <polygon points="150,112 165,138 135,138" fill="#FF6B35" stroke="#3B2314" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="150" cy="144" r="5" fill="#3B2314"/>
+      <text x="150" y="214" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="13" fill="#3B2314" text-anchor="middle">${title.toUpperCase().slice(0, 16)}</text>
+      <text x="150" y="234" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="10" fill="#FF6B35" text-anchor="middle">${categoryLabel.toUpperCase()}</text>
     </svg>
   `;
 }
 
-// ==========================================================================
 // 2. SHOPPING CART STATE
 // ==========================================================================
 let cart = [];
@@ -721,22 +712,16 @@ const formProductDesc = document.getElementById('formProductDesc');
 // 4. TOAST NOTIFICATIONS
 // ==========================================================================
 function showToast(message, type = 'success') {
+  if (!toastContainer) return;
   const toast = document.createElement('div');
-  toast.className = 'toast';
-
-  let icon = '🦊';
-  if (type === 'warning') icon = '⚠️';
-  if (type === 'info') icon = '💌';
-
-  toast.innerHTML = `
-    <span class="toast-icon">${icon}</span>
-    <span class="toast-message">${message}</span>
-  `;
+  toast.className = `toast toast-${type}`;
+  toast.innerHTML = `<span class="toast-message">${escapeHtml(message)}</span>`;
 
   toastContainer.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('show'));
 
   setTimeout(() => {
-    toast.classList.add('toast-out');
+    toast.classList.remove('show');
     setTimeout(() => {
       if (toast.parentNode) toast.parentNode.removeChild(toast);
     }, 200);
@@ -751,7 +736,7 @@ function formatRupees(amount) {
 // ==========================================================================
 // 5. CATALOG RENDERING & SHOPPING
 // ==========================================================================
-function createProductCardHTML(product) {
+function createProductCardHTML(product, index) {
   const isOutOfStock = product.stock <= 0;
   
   let stockBadgeClass = 'stock-in';
@@ -760,9 +745,22 @@ function createProductCardHTML(product) {
 
   const imgSrc = product.image || getDefaultImageForCategory(product.category);
 
+  // Broken Grid: first item is featured on desktop
+  const isFeatured = (index === 0);
+  const featuredClass = isFeatured ? ' is-featured-card' : '';
+
+  // Slightly tilted hand-placed stickers
+  let stickerHTML = '';
+  if (product.id === 'otk-01' || index === 0) {
+    stickerHTML = '<span class="product-badge-sticker sticker-accent">New arrival</span>';
+  } else if (product.id === 'otk-04' || index === 3) {
+    stickerHTML = '<span class="product-badge-sticker sticker-subtle">Fan favorite</span>';
+  }
+
   return `
-    <article class="product-card" data-id="${product.id}">
+    <article class="product-card${featuredClass}" data-id="${product.id}">
       <div class="product-image-container" data-current-view="photo">
+        ${stickerHTML}
         <span class="product-category-chip">${product.categoryLabel}</span>
         <span class="stock-badge ${stockBadgeClass}">
           <span class="stock-badge-dot"></span>
@@ -773,7 +771,7 @@ function createProductCardHTML(product) {
           alt="${escapeHtml(product.name)}" 
           class="product-image-img" 
           loading="lazy" 
-          onload="handleProductImageSuccess(this, '${product.id}')"
+          onload="handleProductImageSuccess(this, '${product.id}')" 
           onerror="handleProductImageError(this, '${product.id}')"
         >
         <div class="product-image-fallback" id="fallback-${product.id}" style="display: none;">
@@ -785,18 +783,18 @@ function createProductCardHTML(product) {
             class="view-mode-btn active" 
             data-mode="photo" 
             data-id="${product.id}" 
-            title="Real product photo (Default)"
+            title="Real product photo"
           >
-            <span class="view-mode-icon">📷</span> Photo
+            Photo
           </button>
           <button 
             type="button" 
             class="view-mode-btn" 
             data-mode="art" 
             data-id="${product.id}" 
-            title="Cute vector illustration"
+            title="Vector illustration"
           >
-            <span class="view-mode-icon">🎨</span> Art
+            Art
           </button>
         </div>
       </div>
@@ -819,7 +817,7 @@ function createProductCardHTML(product) {
             data-id="${product.id}"
             ${isOutOfStock ? 'disabled title="Out of Stock - Currently Unavailable"' : ''}
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <path d="M16 10a4 4 0 0 1-8 0"></path>
@@ -869,7 +867,7 @@ function renderProducts() {
     emptyState.style.display = 'block';
   } else {
     emptyState.style.display = 'none';
-    productsGrid.innerHTML = list.map(createProductCardHTML).join('');
+    productsGrid.innerHTML = list.map((item, idx) => createProductCardHTML(item, idx)).join('');
     setTimeout(checkLoadedImages, 200);
   }
 }
@@ -902,12 +900,14 @@ function updateCategoryCounters() {
 // 6. CART DRAWER & CHECKOUT WITH AUTOMATIC STOCK REDUCTION
 // ==========================================================================
 function openCartDrawer() {
+  document.body.classList.add('cart-open');
   cartDrawer.classList.add('active');
   cartOverlay.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
 function closeCartDrawer() {
+  document.body.classList.remove('cart-open');
   cartDrawer.classList.remove('active');
   cartOverlay.classList.remove('active');
   document.body.style.overflow = '';
@@ -918,14 +918,14 @@ function addToCart(productId) {
   if (!product) return;
 
   if (product.stock <= 0) {
-    showToast(`⚠️ Sorry, "${product.name}" is currently Out of Stock!`, 'warning');
+    showToast(`Sorry, "${product.name}" is currently out of stock.`, 'warning');
     return;
   }
 
   const existing = cart.find(item => item.id === productId);
   if (existing) {
     if (existing.quantity >= product.stock) {
-      showToast(`⚠️ Only ${product.stock} units available in stock!`, 'warning');
+      showToast(`Only ${product.stock} units available in stock.`, 'warning');
       return;
     }
     existing.quantity += 1;
@@ -945,7 +945,7 @@ function addToCart(productId) {
   saveCart();
   updateCartUI();
   animateCartBadge();
-  showToast(`Added to cart: ${product.name}! ✨`, 'success');
+  showToast(`Added to cart: ${product.name}`, 'success');
   openCartDrawer();
 }
 
@@ -957,7 +957,7 @@ function updateCartQuantity(productId, delta) {
   const newQty = cart[itemIndex].quantity + delta;
 
   if (product && newQty > product.stock) {
-    showToast(`⚠️ Cannot add more: Only ${product.stock} units in stock!`, 'warning');
+    showToast(`Cannot add more: only ${product.stock} units in stock.`, 'warning');
     return;
   }
 
@@ -1015,27 +1015,33 @@ function updateCartUI() {
 
   if (shippingProgressText && shippingProgressFill) {
     if (subtotal === 0) {
-      shippingProgressText.innerHTML = `Add items worth <strong>₹${FREE_SHIPPING_THRESHOLD}</strong> for FREE delivery! 🚚`;
+      shippingProgressText.innerHTML = `Add items worth <strong>₹${FREE_SHIPPING_THRESHOLD}</strong> for free delivery`;
       shippingProgressFill.style.width = '0%';
     } else if (subtotal >= FREE_SHIPPING_THRESHOLD) {
-      shippingProgressText.innerHTML = `🎉 Yay! You have unlocked <strong>FREE Delivery</strong>!`;
+      shippingProgressText.innerHTML = `Your order qualifies for <strong>free delivery</strong> across India`;
       shippingProgressFill.style.width = '100%';
     } else {
       const diff = FREE_SHIPPING_THRESHOLD - subtotal;
       const pct = Math.min(100, Math.round((subtotal / FREE_SHIPPING_THRESHOLD) * 100));
-      shippingProgressText.innerHTML = `Add <strong>₹${diff}</strong> more for FREE delivery! 📦`;
+      shippingProgressText.innerHTML = `Add <strong>₹${diff}</strong> more for free delivery`;
       shippingProgressFill.style.width = `${pct}%`;
     }
   }
 
-  if (cart.length === 0) {
+    if (cart.length === 0) {
     cartItemsList.innerHTML = `
       <div class="cart-empty-message">
-        <div class="empty-cart-icon">🛒</div>
+        <div class="empty-cart-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 38px; height: 38px; stroke: #8C7A6B;">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+        </div>
         <h4>Your cart is empty</h4>
-        <p>No otaku merch yet! Browse our collection and add your favorite items.</p>
+        <p>Your bag is waiting for some good anime tees, figures, or keychains.</p>
         <button class="btn btn-primary" onclick="closeCartDrawer(); window.location.hash='#shop';">
-          Browse Collection ✨
+          Browse Catalog
         </button>
       </div>
     `;
@@ -1058,7 +1064,7 @@ function updateCartUI() {
             onerror="handleThumbImageError(this)"
           >
           <div class="cart-thumb-fallback" style="display: none;">
-            ${item.svgArt || '<span class="thumb-fallback-icon">🦊</span>'}
+            ${item.svgArt || '<span class="thumb-fallback-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></span>'}
           </div>
         </div>
         <div class="cart-item-info">
@@ -1093,7 +1099,7 @@ function handleCheckout() {
   for (const item of cart) {
     const prod = products.find(p => p.id === item.id);
     if (!prod || prod.stock < item.quantity) {
-      showToast(`⚠️ Stock shortage: Only ${prod ? prod.stock : 0} units left for "${item.name}"!`, 'warning');
+      showToast(`Stock shortage: only ${prod ? prod.stock : 0} units left for "${item.name}".`, 'warning');
       return;
     }
   }
@@ -1134,7 +1140,7 @@ function handleCheckout() {
       <span>${formatRupees(grandTotal)}</span>
     </div>
     <div style="margin-top: 12px; font-size: 0.8rem; color: #2A9D8F; font-weight: 600; text-align: center;">
-      ✓ Inventory stock automatically deducted in store backend!
+      Stock automatically updated in inventory.
     </div>
   `;
 
@@ -1151,7 +1157,7 @@ function handleCheckout() {
   closeCartDrawer();
   checkoutModalOverlay.classList.add('active');
 
-  showToast('🎉 Order placed! Stock automatically reduced.', 'success');
+  showToast('Order placed. Stock automatically updated.', 'success');
 }
 
 // ==========================================================================
@@ -1159,12 +1165,14 @@ function handleCheckout() {
 // ==========================================================================
 
 function openAdminPanel() {
+  document.body.classList.add('admin-open');
   renderAdminPanel();
   adminPanelOverlay.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
 function closeAdminPanel() {
+  document.body.classList.remove('admin-open');
   adminPanelOverlay.classList.remove('active');
   document.body.style.overflow = '';
 }
@@ -1213,7 +1221,7 @@ function renderAdminPanel() {
     adminProductsTbody.innerHTML = `
       <tr>
         <td colspan="7" style="text-align: center; padding: 36px; color: #6B4E3D;">
-          🔍 No inventory items found matching your filter criteria.
+          No inventory items found matching your filter criteria.
         </td>
       </tr>
     `;
@@ -1242,15 +1250,15 @@ function renderAdminPanel() {
               onerror="handleThumbImageError(this)"
             >
             <div class="admin-thumb-fallback" style="display: none;">
-              ${p.svgArt || '<span class="thumb-fallback-icon">🦊</span>'}
+              ${p.svgArt || '<span class="thumb-fallback-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></span>'}
             </div>
           </div>
         </td>
         <td>
           <div class="admin-product-name-cell">
             <span class="admin-prod-title">${escapeHtml(p.name)}</span>
-            <span class="admin-prod-id">ID: #${p.id} ${isBelowFive ? '⚠️ <strong style="color:#FF6B35;">Low Stock Warning!</strong>' : ''}</span>
-            ${p.image ? `<span class="admin-prod-img-path" title="${escapeHtml(p.image)}">📷 ${escapeHtml(p.image)}</span>` : ''}
+            <span class="admin-prod-id">ID: #${p.id} ${isBelowFive ? '<span class="admin-stock-alert">Low Stock (&lt; 5)</span>' : ''}</span>
+            ${p.image ? `<span class="admin-prod-img-path" title="${escapeHtml(p.image)}">${escapeHtml(p.image)}</span>` : ''}
           </div>
         </td>
         <td>
@@ -1283,10 +1291,10 @@ function renderAdminPanel() {
         <td>
           <div class="admin-actions-cell">
             <button class="admin-action-btn btn-edit" data-action="admin-edit" data-id="${p.id}" title="Edit Product">
-              ✏️ Edit
+              Edit
             </button>
             <button class="admin-action-btn btn-delete" data-action="admin-delete" data-id="${p.id}" title="Delete Product">
-              🗑️ Delete
+              Delete
             </button>
           </div>
         </td>
@@ -1304,18 +1312,18 @@ function updateFormImagePreview(val, category) {
   formImagePreview.onerror = () => {
     formImagePreview.style.display = 'none';
     if (!val || !val.trim()) {
-      previewStatusText.innerHTML = `<span>📷 Default image: <code>${effectiveSrc}</code> (fallback illustration will be used if file not found)</span>`;
+      previewStatusText.innerHTML = `<span>Default image: <code>${effectiveSrc}</code> (fallback illustration will be used if file not found)</span>`;
     } else {
-      previewStatusText.innerHTML = `<span style="color:#FF6B35;">⚠️ Could not load image from "<code>${escapeHtml(val)}</code>". Fallback illustration will display.</span>`;
+      previewStatusText.innerHTML = `<span style="color:#FF6B35;">Could not load image from "<code>${escapeHtml(val)}</code>". Fallback illustration will display.</span>`;
     }
   };
 
   formImagePreview.onload = () => {
     formImagePreview.style.display = 'block';
     if (!val || !val.trim()) {
-      previewStatusText.innerHTML = `<span style="color:#2A9D8F;">✓ Using category default: <code>${effectiveSrc}</code></span>`;
+      previewStatusText.innerHTML = `<span style="color:#2A9D8F;">Using category default: <code>${effectiveSrc}</code></span>`;
     } else {
-      previewStatusText.innerHTML = `<span style="color:#2A9D8F;">✓ Image loaded successfully!</span>`;
+      previewStatusText.innerHTML = `<span style="color:#2A9D8F;">Image loaded successfully.</span>`;
     }
   };
 
@@ -1372,7 +1380,7 @@ function handleProductFormSubmit(e) {
   const description = formProductDesc.value.trim();
 
   if (!name || isNaN(price) || isNaN(stock) || !description) {
-    showToast('⚠️ Please fill all required fields.', 'warning');
+    showToast('Please fill all required fields.', 'warning');
     return;
   }
 
@@ -1400,7 +1408,7 @@ function handleProductFormSubmit(e) {
       description,
       svgArt: (existing && existing.svgArt) ? existing.svgArt : generateProductSvg(theme, name, categoryLabel)
     });
-    showToast(`Updated "${name}" successfully! ✨`, 'success');
+    showToast(`Updated "${name}" successfully.`, 'success');
   } else {
     // Add New Product
     const newProd = addProduct({
@@ -1414,7 +1422,7 @@ function handleProductFormSubmit(e) {
       description,
       svgArt: generateProductSvg(theme, name, categoryLabel)
     });
-    showToast(`Added new product "${name}"! 🎉`, 'success');
+    showToast(`Added new product "${name}".`, 'success');
   }
 
   closeProductFormModal();
@@ -1431,7 +1439,7 @@ function handleDeleteProduct(productId) {
   if (!confirmed) return;
 
   deleteProduct(productId);
-  showToast(`🗑️ Deleted "${product.name}" from inventory.`, 'info');
+  showToast(`Deleted "${product.name}" from inventory.`, 'info');
 
   // Also remove from cart if present
   cart = cart.filter(i => i.id !== productId);
@@ -1477,7 +1485,7 @@ productsGrid.addEventListener('click', (e) => {
   if (modeBtn) {
     e.stopPropagation();
     if (modeBtn.classList.contains('disabled')) {
-      showToast('⚠️ Real photo is unavailable for this item', 'warning');
+      showToast('Real photo is unavailable for this item', 'warning');
       return;
     }
     const mode = modeBtn.getAttribute('data-mode'); // 'photo' or 'art'
@@ -1494,11 +1502,11 @@ productsGrid.addEventListener('click', (e) => {
       if (img) img.style.display = 'none';
       if (fallback) fallback.style.display = 'flex';
       container.setAttribute('data-current-view', 'art');
-      showToast('🎨 Showing cute illustration view', 'info');
+      showToast('Showing illustration view', 'info');
     } else {
       // Photo mode
       if (img && img.getAttribute('data-failed') === 'true') {
-        showToast('⚠️ Real photo file could not be loaded', 'warning');
+        showToast('Photo file could not be loaded', 'warning');
         return;
       }
       allBtns.forEach(btn => btn.classList.remove('active'));
@@ -1506,7 +1514,7 @@ productsGrid.addEventListener('click', (e) => {
       if (fallback) fallback.style.display = 'none';
       if (img) img.style.display = 'block';
       container.setAttribute('data-current-view', 'photo');
-      showToast('📷 Showing real product photo', 'info');
+      showToast('Showing real product photo', 'info');
     }
     return;
   }
@@ -1515,7 +1523,7 @@ productsGrid.addEventListener('click', (e) => {
   const addBtn = e.target.closest('[data-action="add-to-cart"]');
   if (addBtn) {
     if (addBtn.disabled) {
-      showToast('⚠️ This item is out of stock!', 'warning');
+      showToast('This item is out of stock.', 'warning');
       return;
     }
     const id = addBtn.getAttribute('data-id');
@@ -1734,11 +1742,11 @@ if (contactForm) {
     const message = document.getElementById('contactMessage').value.trim();
 
     if (!name || !email || !subject || !message) {
-      showToast('⚠️ Please fill in all required fields.', 'warning');
+      showToast('Please fill in all required fields.', 'warning');
       return;
     }
 
-    showToast(`💌 Arigatou ${name}! Message sent successfully!`, 'success');
+    showToast(`Thanks ${name}, message sent.`, 'success');
     contactForm.reset();
   });
 }
@@ -1795,7 +1803,7 @@ function scrollToProduct(productId) {
       targetCard.classList.add('highlight-pulse');
       
       const prodName = product ? product.name : 'product';
-      showToast(`✨ Found "${prodName}" in the shop!`, 'info');
+      showToast(`Showing "${prodName}" in shop`, 'info');
     } else {
       const shopSection = document.getElementById('shop');
       if (shopSection) {
